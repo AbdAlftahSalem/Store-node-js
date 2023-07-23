@@ -5,7 +5,7 @@ const {User} = require("../models_index")
 
 exports.registerUser = [
 
-    check("user_name")
+    check("username")
         .isLength({min: 3})
         .withMessage("Too Short username")
         .isLength({max: 20}).withMessage("Too long username"),

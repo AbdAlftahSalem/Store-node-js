@@ -11,11 +11,8 @@ env.config({path: "./config.env"})
 exports.registerUser = async (req, res) => {
 
     req.body["password"] = await bcrypt.hash(req.body["password"], 10)
-    const user = await User.create(req.body, {
-        attributes: {
-            exclude: ['password']
-        }
-    })
+
+    const user = await User.create(req.body)
 
     const token = generateToken(user["id"])
 
