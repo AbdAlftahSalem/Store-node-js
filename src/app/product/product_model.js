@@ -19,6 +19,9 @@ module.exports = (db, type) => db.define('Product', {
     category_id: {
         type: type.INTEGER, allowNull: false,
     },
+    sub_category_id: {
+        type: type.INTEGER, allowNull: false,
+    },
     createdAt: {
         type: type.DATE, allowNull: false,
     },
