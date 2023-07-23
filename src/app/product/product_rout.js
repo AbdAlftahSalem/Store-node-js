@@ -1,20 +1,18 @@
 const express = require("express")
 const validator = require("../product/product_validator")
-const {User} = require("../models_index")
+const {User, Category} = require("../models_index")
 
 const {
     createProduct,
     deleteProduct,
     getAllProducts,
     getAllProductsForCategory,
-    getAllProductsForSubCategory,
     getAllProductsForUser,
-    updateProduct,
     getProductById,
 } = require("./product_controller")
 const Auth = require("../auth/auth_controller");
+
 const {uploadFile} = require("../../middlewere/upload_file");
-const {check} = require("express-validator");
 const {ApiError} = require("../../utils/response_handel/error_handeler");
 
 
@@ -41,6 +39,12 @@ createProductValidator = (req, res, next) => {
         return next(new ApiError("Enter valid quantity", 400))
     }
 
+    // check if category_id is valid and sane in database
+    const category = Category.findOne({where: {id: req.body["category_id"]}})
+    if (!category) {
+        return next(new ApiError("Enter valid category_id", 400))
+    }
+
     // check if user_id is valid and sane in database
     const user = User.findOne({where: {id: req.body["user_id"]}})
     if (!user) {
@@ -52,10 +56,9 @@ createProductValidator = (req, res, next) => {
 router.route("/get-products").get(getAllProducts)
 router.route("/get-product-by-id").get(validator.getProductById, getProductById)
 router.route("/get-products-for-category").get(validator.getAllProductsForCategory, getAllProductsForCategory)
-router.route("/get-products-for-sub-category").get(validator.getAllProductsForSubCategory, getAllProductsForSubCategory)
 router.route("/get-products-for-user").get(validator.getAllProductsForUser, getAllProductsForUser)
 router.route("/create-product").post((req, res, next) => Auth.protectRout(req, res, next, ["manger", "admin"]), (req, res, next) => uploadFile(req, res, next, "image"), createProductValidator, createProduct)
-router.route("/delete-product").post(validator.deleteProduct, deleteProduct)
+router.route("/delete-product").post(Auth.protectRout, validator.deleteProduct, deleteProduct)
 
 
 module.exports = router;

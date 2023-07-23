@@ -3,8 +3,6 @@ const {Product, Category, User} = require("../models_index")
 const successResponse = require("../../utils/response_handel/success_handeler")
 const {ApiError} = require("../../utils/response_handel/error_handeler");
 
-const env = require("dotenv");
-env.config({path: "./config.env"})
 
 // create product
 exports.createProduct = async (req, res, next) => {
@@ -15,17 +13,11 @@ exports.createProduct = async (req, res, next) => {
 // get all products
 exports.getAllProducts = async (req, res, next) => {
     const products = await Product.findAll({
-        include: [
-            {
-                model: Category,
-                foreignKey: 'category_id',
-            },
-            {
-                model: User,
-                foreignKey: 'user_id',
-                attributes: { exclude: ['password'] },
-            }
-        ],
+        include: [{
+            model: Category, foreignKey: 'category_id',
+        }, {
+            model: User, foreignKey: 'user_id', attributes: {exclude: ['password']},
+        }],
     })
     return successResponse(res, products, 200, "Products found successfully")
 }
@@ -34,6 +26,11 @@ exports.getAllProducts = async (req, res, next) => {
 exports.getProductById = async (req, res, next) => {
     const product = await Product.findOne({
         where: {id: req.body["product_id"]},
+        include: [{
+            model: Category, foreignKey: 'category_id',
+        }, {
+            model: User, foreignKey: 'user_id', attributes: {exclude: ['password']},
+        }],
     })
     if (!product) {
         return next(new ApiError("Product not found", 404))
@@ -104,6 +101,11 @@ exports.getAllProductsForSubCategory = async (req, res, next) => {
 exports.getAllProductsForUser = async (req, res, next) => {
     const products = await Product.findAll({
         where: {user_id: req.body["user_id"]},
+        include: [{
+            model: Category, foreignKey: 'category_id',
+        }, {
+            model: User, foreignKey: 'user_id', attributes: {exclude: ['password']},
+        }],
     })
     if (!products) {
         return next(new ApiError("Products not found", 404))
