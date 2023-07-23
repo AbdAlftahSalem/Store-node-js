@@ -35,7 +35,7 @@ module.exports = (db, type) => db.define('Product', {
         type: type.INTEGER, allowNull: false,
     },
     status: {
-        type: type.ENUM, values: ['active', 'inactive'], defaultValue: 'inactive',
+        type: type.ENUM, values: ['available', 'unavailable'], defaultValue: 'unavailable',
     },
 
 

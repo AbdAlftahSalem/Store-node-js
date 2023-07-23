@@ -6,6 +6,9 @@ module.exports = (db, type) => db.define('Order', {
     user_id: {
         type: type.INTEGER, allowNull: false,
     },
+    address_id: {
+        type: type.INTEGER, allowNull: false,
+    },
     product_id: {
         type: type.INTEGER, allowNull: false,
     },
@@ -19,7 +22,7 @@ module.exports = (db, type) => db.define('Order', {
         type: type.DATE, allowNull: false,
     },
     status_order: {
-        type: type.ENUM, values: ['pending', 'in delivery', 'delivered'], defaultValue: 'pending',
+        type: type.ENUM, values: ['pending', 'delivery', 'delivered'], defaultValue: 'pending',
     },
 }, {
     freezeTableName: true, timestamps: true, tableName: 'order',
