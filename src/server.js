@@ -20,11 +20,12 @@ app.use(urlencoded({
     extended: false
 }));
 
-// Mount Routes
 dbConnection.authenticate().then(_ => console.log("connected to db")).catch(e => console.log(e))
 
 app.use(cors())
 
+
+mountRoutes(app);
 
 // compress all responses
 app.use(compression());

@@ -45,3 +45,11 @@ exports.registerUser = [
 
 
 ]
+
+exports.loginUser = [
+
+    check("email").notEmpty().isEmail().withMessage("Enter valid email"),
+    check("password").notEmpty().withMessage("password required"),
+    validator,
+
+]

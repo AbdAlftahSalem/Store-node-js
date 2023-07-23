@@ -1,4 +1,4 @@
-const {User, Plan} = require("../auth/user_model")
+const {User} = require("../models_index")
 const bcrypt = require("bcrypt")
 const jwt = require("jsonwebtoken")
 
