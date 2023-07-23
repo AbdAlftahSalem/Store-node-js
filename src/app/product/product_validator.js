@@ -1,7 +1,6 @@
 const {check} = require('express-validator');
 
 const validator = require("../../middlewere/validator")
-const {Category} = require("../models_index")
 
 exports.createProduct = [
 

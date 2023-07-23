@@ -1,23 +1,33 @@
 module.exports = (db, type) => db.define('Address', {
     id: {
         type: type.INTEGER, primaryKey: true, autoIncrement: true,
-    },
-    user_id: {
+    }, user_id: {
         type: type.INTEGER, allowNull: false,
-    },
-    address: {
+    }, address: {
+        type: type.STRING, allowNull: false,
+    }, city: {
         type: type.STRING, allowNull: false,
     },
+
+    state: {
+        type: type.STRING, allowNull: false,
+    },
+
+    country: {
+        type: type.STRING, allowNull: false,
+    },
+
+    zip_code: {
+        type: type.STRING, allowNull: false,
+    },
+
     createdAt: {
         type: type.DATE, allowNull: false,
-    },
-    updatedAt: {
+    }, updatedAt: {
         type: type.DATE, allowNull: false,
-    },
-    latitude: {
+    }, latitude: {
         type: type.STRING, allowNull: false,
-    },
-    longitude: {
+    }, longitude: {
         type: type.STRING, allowNull: false,
     },
 

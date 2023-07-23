@@ -35,5 +35,5 @@ Product.belongsTo(Category, {foreignKey: 'category_id'});
 db.sync({force: true}).then(_ => console.log("db synced")).catch(e => console.log(e))
 
 module.exports = {
-    User, Order, Product, Category
+    User, Order, Product, Category, Address
 };
