@@ -30,9 +30,14 @@ Address.belongsTo(User, {foreignKey: 'user_id'});
 Category.hasMany(Product, {foreignKey: 'category_id'});
 Product.belongsTo(Category, {foreignKey: 'category_id'});
 
+Category.belongsTo(Category, {
+    as: 'parentCategory',
+    foreignKey: 'parent_category',
+    targetKey: 'id',
+});
 
 //  sync db
-db.sync({force: true}).then(_ => console.log("db synced")).catch(e => console.log(e))
+db.sync({force: false}).then(_ => console.log("db synced")).catch(e => console.log(e))
 
 module.exports = {
     User, Order, Product, Category, Address

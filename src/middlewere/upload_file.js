@@ -2,6 +2,7 @@ const multer = require('multer');
 const {initializeApp} = require("firebase/app");
 const {getStorage, getDownloadURL, ref, uploadBytesResumable} = require("firebase/storage");
 const {FirebaseConfig} = require("../config/firebase_config");
+const {ApiError} = require("../utils/response_handel/error_handeler");
 
 
 // Initialize Firebase
@@ -14,19 +15,19 @@ const upload = multer({storage: multer.memoryStorage()});
 
 
 // Define the upload middleware
-exports.uploadFile = async (req, res, next, fileName, typeFiled = ["pdf"]) => {
+exports.uploadFile = async (req, res, next, fileName, typeFiled = ["jpg", "png", "jpeg", "png"]) => {
     upload.single(fileName)(req, res, (err) => {
         if (err) {
             return res.status(500).json({error: err.message});
         }
 
         const file = req.file;
-        if (!file) {
-            return res.status(400).json({error: 'No file provided'});
+        if (file == null) {
+            return next(new ApiError("No file provided", 400))
         }
 
         if (!typeFiled.includes(req.file["originalname"].toString().split(".")[1].toLocaleLowerCase())) {
-            return res.status(400).json({error: 'No file provided'});
+            return next(new ApiError("File type not supported", 400))
         }
 
         // Create a bucket reference
@@ -42,7 +43,6 @@ exports.uploadFile = async (req, res, next, fileName, typeFiled = ["pdf"]) => {
 
         uploadTask.on('state_changed',
             (snapshot) => {
-                // Track upload progress if needed
             },
             (error) => {
                 console.error(error);
@@ -50,7 +50,7 @@ exports.uploadFile = async (req, res, next, fileName, typeFiled = ["pdf"]) => {
             },
             async () => {
                 // File upload completed successfully
-                req.file = await getDownloadURL(storageRef)
+                req.body[fileName] = await getDownloadURL(storageRef)
                 next();
             }
         );
