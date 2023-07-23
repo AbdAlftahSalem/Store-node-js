@@ -8,6 +8,7 @@ env.config({path: "./config.env"})
 
 // create address
 exports.createAddress = async (req, res, next) => {
+    req.body["user_id"] = req.body.user["id"]
     const address = await Address.create(req.body)
     return successResponse(res, address, 201, "Address created successfully")
 }
@@ -72,8 +73,9 @@ exports.deleteAddress = async (req, res, next) => {
 
 // get all addresses for user
 exports.getAllAddressesForUser = async (req, res, next) => {
+
     const addresses = await Address.findAll({
-        where: {user_id: req.body["user_id"]},
+        where: {user_id: req.body.user["id"]},
     })
     if (!addresses) {
         return next(new ApiError("Addresses not found", 404))
