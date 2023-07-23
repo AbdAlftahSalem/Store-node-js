@@ -1,4 +1,4 @@
-const {Product} = require("../models_index")
+const {Product, Category, User} = require("../models_index")
 
 const successResponse = require("../../utils/response_handel/success_handeler")
 const {ApiError} = require("../../utils/response_handel/error_handeler");
@@ -14,7 +14,19 @@ exports.createProduct = async (req, res, next) => {
 
 // get all products
 exports.getAllProducts = async (req, res, next) => {
-    const products = await Product.findAll()
+    const products = await Product.findAll({
+        include: [
+            {
+                model: Category,
+                foreignKey: 'category_id',
+            },
+            {
+                model: User,
+                foreignKey: 'user_id',
+                attributes: { exclude: ['password'] },
+            }
+        ],
+    })
     return successResponse(res, products, 200, "Products found successfully")
 }
 

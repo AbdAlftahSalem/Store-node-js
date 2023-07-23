@@ -20,7 +20,8 @@ module.exports = (db, type) => db.define('Product', {
         type: type.INTEGER, allowNull: false,
     },
     sub_category_id: {
-        type: type.INTEGER, allowNull: false,
+        type: type.INTEGER, allowNull: true,
+        defaultValue: null,
     },
     createdAt: {
         type: type.DATE, allowNull: false,
