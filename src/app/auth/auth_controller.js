@@ -12,9 +12,9 @@ exports.registerUser = async (req, res) => {
 
     req.body["password"] = await bcrypt.hash(req.body["password"], 10)
     const user = await User.create(req.body, {
-        include: [{
-            model: Plan,
-        }]
+        attributes: {
+            exclude: ['password']
+        }
     })
 
     const token = generateToken(user["id"])
@@ -25,11 +25,6 @@ exports.registerUser = async (req, res) => {
 exports.loginUser = async (req, res, next) => {
     let user = await User.findOne({
         where: {email: req.body["email"]},
-        include: [
-            {
-                model: Plan,
-            }
-        ]
     })
 
     if (user == null) {
@@ -50,9 +45,7 @@ exports.getMe = async (req, res, next) => {
             id: req.body.user["id"]
         }, attributes: {
             exclude: ['password']
-        }, include: [{
-            model: Plan,
-        },]
+        }
     });
     if (!user) {
         return next(new ApiError("User not found", 404))

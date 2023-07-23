@@ -10,6 +10,9 @@ module.exports = (db, type) => db.define('User', {
     }, phone: {
         type: type.STRING, allowNull: false, unique: true,
     },
+    role: {
+        type: type.ENUM('user', 'admin', 'manger'), defaultValue: 'user',
+    }
 
 }, {
     freezeTableName: true, timestamps: true, tableName: 'user',
