@@ -30,6 +30,15 @@ Address.belongsTo(User, {foreignKey: 'user_id'});
 Category.hasMany(Product, {foreignKey: 'category_id'});
 Product.belongsTo(Category, {foreignKey: 'category_id'});
 
+// Order belongs to a Product
+Product.hasMany(Order, {foreignKey: 'product_id'});
+Order.belongsTo(Product, {foreignKey: 'product_id'});
+
+// Order belongs to an Address
+Address.hasMany(Order, {foreignKey: 'address_id'});
+Order.belongsTo(Address, {foreignKey: 'address_id'});
+
+
 Category.belongsTo(Category, {
     as: 'parentCategory',
     foreignKey: 'parent_category',
