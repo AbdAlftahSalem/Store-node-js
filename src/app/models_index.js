@@ -54,5 +54,5 @@ Category.belongsTo(Category, {
 db.sync({force: false}).then(_ => console.log("db synced")).catch(e => console.log(e))
 
 module.exports = {
-    User, Order, Product, Category, Address
+    User, Order, Product, Category, Address, Review
 };
