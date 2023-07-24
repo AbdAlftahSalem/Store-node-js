@@ -7,6 +7,7 @@ const OrderModel = require('./order/order_model');
 const ProductModel = require('./product/product_model');
 const CategoryModel = require('./category/category_model');
 const AddressModel = require('./address/address_model');
+const ReviewModel = require('./review/review_model');
 
 
 //  create objects
@@ -15,6 +16,7 @@ const Order = OrderModel(db, Sequelize);
 const Product = ProductModel(db, Sequelize);
 const Category = CategoryModel(db, Sequelize);
 const Address = AddressModel(db, Sequelize);
+const Review = ReviewModel(db, Sequelize);
 
 
 // Associations
@@ -38,6 +40,9 @@ Order.belongsTo(Product, {foreignKey: 'product_id'});
 Address.hasMany(Order, {foreignKey: 'address_id'});
 Order.belongsTo(Address, {foreignKey: 'address_id'});
 
+// Product has many reviews
+Product.hasMany(Review, {foreignKey: 'product_id'});
+Review.belongsTo(Product, {foreignKey: 'product_id'});
 
 Category.belongsTo(Category, {
     as: 'parentCategory',
