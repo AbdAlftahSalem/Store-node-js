@@ -38,8 +38,6 @@ W
 'src/app/category/category_controller.js,d\0\d0cfc2fdb4247d901ef513a51db40fc82908eed8
 R
 "src/app/category/category_model.js,e\a\ea7ef5cb548b2960ae977b5a80df6fbb29b7ccad
-U
-%src/app/product/product_controller.js,1\7\173ad74dd5229991ebdf634617f3915081c77002
 T
 $src/app/address/address_validator.js,2\8\28b62145719c7cbcf72c4c27d6f9e79a958ea2fa
 T

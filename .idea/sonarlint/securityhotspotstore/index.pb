@@ -38,8 +38,6 @@ Q
 !src/app/category/category_rout.js,f\4\f4780eb96202976c8abfebaa8a1dd3a991abb9fe
 W
 'src/app/category/category_controller.js,d\0\d0cfc2fdb4247d901ef513a51db40fc82908eed8
-U
-%src/app/product/product_controller.js,1\7\173ad74dd5229991ebdf634617f3915081c77002
 T
 $src/app/address/address_validator.js,2\8\28b62145719c7cbcf72c4c27d6f9e79a958ea2fa
 T
