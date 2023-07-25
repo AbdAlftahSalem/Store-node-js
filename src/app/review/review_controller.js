@@ -1,4 +1,4 @@
-const {Review, Product} = require("../models_index")
+const {Review, Product, User} = require("../models_index")
 
 const successResponse = require("../../utils/response_handel/success_handeler")
 const {ApiError} = require("../../utils/response_handel/error_handeler");
@@ -6,18 +6,9 @@ const {ApiError} = require("../../utils/response_handel/error_handeler");
 
 // add review to product
 exports.addReview = async (req, res, next) => {
+
     // add user_id to body
     req.body["user_id"] = req.body.user["id"]
-
-    // check if product exist and available
-
-    const product = await Product.findOne({
-        where: {id: req.body["product_id"], status: "available"},
-    })
-
-    if (!product) {
-        return next(new ApiError("Product not found", 404))
-    }
 
     // check if rating is between 1 and 5
     if (req.body["rating"] < 1 || req.body["rating"] > 5) {
@@ -27,6 +18,16 @@ exports.addReview = async (req, res, next) => {
     // check if review is empty
     if (req.body["review"] === "") {
         return next(new ApiError("review can`t be empty", 400))
+    }
+
+    // check if product exist and available
+    const product = await Product.findOne({
+        where: {id: req.body["product_id"], status: "available"},
+    })
+
+
+    if (!product) {
+        return next(new ApiError("Product not found", 404))
     }
 
     // check if user already add review to this product
@@ -40,8 +41,7 @@ exports.addReview = async (req, res, next) => {
 
     // add review to product
     await Review.create(req.body)
-
-    successResponse(res, 200, "review added successfully")
+    return successResponse(res, null, 200, "review added successfully")
 
 }
 

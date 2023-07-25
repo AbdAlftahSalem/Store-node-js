@@ -39,7 +39,6 @@ module.exports = (db, type) => db.define('Product', {
         type: type.ENUM, values: ['available', 'unavailable'], defaultValue: 'unavailable',
     },
 
-
 }, {
     freezeTableName: true, timestamps: true, tableName: 'product',
 });

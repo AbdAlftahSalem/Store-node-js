@@ -44,6 +44,10 @@ Order.belongsTo(Address, {foreignKey: 'address_id'});
 Product.hasMany(Review, {foreignKey: 'product_id'});
 Review.belongsTo(Product, {foreignKey: 'product_id'});
 
+// review belongs to a user
+User.hasMany(Review, {foreignKey: 'user_id'});
+Review.belongsTo(User, {foreignKey: 'user_id'});
+
 Category.belongsTo(Category, {
     as: 'parentCategory',
     foreignKey: 'parent_category',

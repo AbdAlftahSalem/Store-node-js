@@ -3,6 +3,7 @@ const CategoryRout = require("../app/category/category_rout");
 const ProductRout = require("../app/product/product_rout");
 const AddressRout = require("../app/address/address_rout");
 const OrderRout = require("../app/order/order_rout");
+const ReviewRout = require("../app/review/review_rout");
 
 const mountRoutes = (app) => {
     app.use('/api/v1/auth', AuthRout)
@@ -10,6 +11,7 @@ const mountRoutes = (app) => {
     app.use('/api/v1/products', ProductRout)
     app.use('/api/v1/address', AddressRout)
     app.use('/api/v1/orders', OrderRout)
+    app.use('/api/v1/reviews', ReviewRout)
 };
 
 module.exports = mountRoutes;

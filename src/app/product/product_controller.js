@@ -1,4 +1,4 @@
-const {Product, Category, User} = require("../models_index")
+const {Product, Category, User, Review} = require("../models_index")
 
 const successResponse = require("../../utils/response_handel/success_handeler")
 const {ApiError} = require("../../utils/response_handel/error_handeler");
@@ -25,8 +25,7 @@ exports.getAllProducts = async (req, res, next) => {
 // get product by id
 exports.getProductById = async (req, res, next) => {
     const product = await Product.findOne({
-        where: {id: req.body["product_id"]},
-        include: [{
+        where: {id: req.body["product_id"]}, include: [{
             model: Category, foreignKey: 'category_id',
         }, {
             model: User, foreignKey: 'user_id', attributes: {exclude: ['password']},
@@ -35,7 +34,17 @@ exports.getProductById = async (req, res, next) => {
     if (!product) {
         return next(new ApiError("Product not found", 404))
     }
-    return successResponse(res, product, 200, "Product found successfully")
+
+    // get reviews for product
+    const reviews = await Review.findAll({
+        where: {product_id: req.body["product_id"]}, include: [{
+            model: User, foreignKey: 'user_id', attributes: {exclude: ['password']},
+        }],
+
+    })
+
+
+    return successResponse(res, {product, reviews}, 200, "Product found successfully")
 }
 
 // update product
@@ -100,8 +109,7 @@ exports.getAllProductsForSubCategory = async (req, res, next) => {
 // get all products for user
 exports.getAllProductsForUser = async (req, res, next) => {
     const products = await Product.findAll({
-        where: {user_id: req.body["user_id"]},
-        include: [{
+        where: {user_id: req.body["user_id"]}, include: [{
             model: Category, foreignKey: 'category_id',
         }, {
             model: User, foreignKey: 'user_id', attributes: {exclude: ['password']},
