@@ -10,6 +10,7 @@ const AddressModel = require('./address/address_model');
 const ReviewModel = require('./review/review_model');
 const FavoriteModel = require('./favorite/favorite_model');
 const CouponModel = require('./coupon/coupon_model');
+const OrderModel = require('./order/order_model');
 
 
 //  create objects
@@ -21,6 +22,7 @@ const Address = AddressModel(db, Sequelize);
 const Review = ReviewModel(db, Sequelize);
 const Favorite = FavoriteModel(db, Sequelize);
 const Coupon = CouponModel(db, Sequelize);
+const Order = OrderModel(db, Sequelize);
 
 // Associations
 User.hasMany(Cart, {foreignKey: 'user_id'});
@@ -38,10 +40,6 @@ Product.belongsTo(Category, {foreignKey: 'category_id'});
 // Order belongs to a Product
 Product.hasMany(Cart, {foreignKey: 'product_id'});
 Cart.belongsTo(Product, {foreignKey: 'product_id'});
-
-// Order belongs to an Address
-Address.hasMany(Cart, {foreignKey: 'address_id'});
-Cart.belongsTo(Address, {foreignKey: 'address_id'});
 
 // Product has many reviews
 Product.hasMany(Review, {foreignKey: 'product_id'});
@@ -71,6 +69,19 @@ Coupon.belongsTo(Cart, {foreignKey: 'order_id'});
 Product.hasMany(Coupon, {foreignKey: 'product_id'});
 Coupon.belongsTo(Product, {foreignKey: 'product_id'});
 
+// //  order belongs to a user
+User.hasMany(Order, { foreignKey: 'user_id'});
+Order.belongsTo(User, { foreignKey: 'user_id' , onDelete: 'CASCADE'});
+
+
+//  order belongs to an address
+Address.hasMany(Order, {foreignKey: 'address_id'});
+Order.belongsTo(Address, {foreignKey: 'address_id'});
+
+// order belongs to a product
+Product.hasMany(Order, {foreignKey: 'product_id'});
+Order.belongsTo(Product, {foreignKey: 'product_id'});
+
 
 Category.belongsTo(Category, {
     as: 'parentCategory',
@@ -82,5 +93,5 @@ Category.belongsTo(Category, {
 db.sync({force: false}).then(_ => console.log("db synced")).catch(e => console.log(e))
 
 module.exports = {
-    User, Order: Cart, Product, Category, Address, Review, Favorite, Coupon
+    User, Cart, Product, Category, Address, Review, Favorite, Coupon, Order
 };

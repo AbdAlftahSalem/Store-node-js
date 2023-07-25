@@ -64,8 +64,6 @@ R
 "src/app/category/category_model.js,e\a\ea7ef5cb548b2960ae977b5a80df6fbb29b7ccad
 W
 'src/app/category/category_controller.js,d\0\d0cfc2fdb4247d901ef513a51db40fc82908eed8
-E
-src/app/rout_index.js,d\3\d345b160e63bfd290406eb6483cf555e99210ae5
 V
 &src/app/category/category_validator.js,5\6\56994255e3abcce6db75ccbd220a445508f6d473
 Q
