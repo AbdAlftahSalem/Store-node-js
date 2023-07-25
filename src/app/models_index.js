@@ -8,6 +8,7 @@ const ProductModel = require('./product/product_model');
 const CategoryModel = require('./category/category_model');
 const AddressModel = require('./address/address_model');
 const ReviewModel = require('./review/review_model');
+const FavoriteModel = require('./favorite/favorite_model');
 
 
 //  create objects
@@ -17,7 +18,7 @@ const Product = ProductModel(db, Sequelize);
 const Category = CategoryModel(db, Sequelize);
 const Address = AddressModel(db, Sequelize);
 const Review = ReviewModel(db, Sequelize);
-
+const Favorite = FavoriteModel(db, Sequelize);
 
 // Associations
 User.hasMany(Order, {foreignKey: 'user_id'});
@@ -48,6 +49,15 @@ Review.belongsTo(Product, {foreignKey: 'product_id'});
 User.hasMany(Review, {foreignKey: 'user_id'});
 Review.belongsTo(User, {foreignKey: 'user_id'});
 
+// user has many favorites
+User.hasMany(Favorite, {foreignKey: 'user_id'});
+Favorite.belongsTo(User, {foreignKey: 'user_id'});
+
+// product has many favorites
+Product.hasMany(Favorite, {foreignKey: 'product_id'});
+Favorite.belongsTo(Product, {foreignKey: 'product_id'});
+
+
 Category.belongsTo(Category, {
     as: 'parentCategory',
     foreignKey: 'parent_category',
@@ -58,5 +68,5 @@ Category.belongsTo(Category, {
 db.sync({force: false}).then(_ => console.log("db synced")).catch(e => console.log(e))
 
 module.exports = {
-    User, Order, Product, Category, Address, Review
+    User, Order, Product, Category, Address, Review, Favorite
 };
