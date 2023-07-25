@@ -13,12 +13,26 @@ exports.createProduct = async (req, res, next) => {
 // get all products
 exports.getAllProducts = async (req, res, next) => {
     const products = await Product.findAll({
-        include: [{
-            model: Category, foreignKey: 'category_id',
-        }, {
-            model: User, foreignKey: 'user_id', attributes: {exclude: ['password']},
-        }],
+        include: [
+            {
+                model: Category, foreignKey: 'category_id',
+            }, {
+                model: User, foreignKey: 'user_id', attributes: {exclude: ['password']},
+            }, {
+                model: Review, // Include the Review model to get reviews
+            }
+        ],
     })
+    // Calculate the average rating for each product and remove the review list
+    products.forEach(product => {
+        const reviews = product["Reviews"];
+        product.dataValues.rating = reviews.reduce((total, review) => {
+            return total + review.rating;
+        }, 0) / reviews.length;
+        delete product.dataValues["Reviews"];
+    })
+
+
     return successResponse(res, products, 200, "Products found successfully")
 }
 
