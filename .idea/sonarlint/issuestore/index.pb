@@ -36,13 +36,37 @@ U
 %src/app/address/address_controller.js,2\7\2756760dd95ef171f3c3630eb8cb04d14dd06250
 O
 src/app/address/address_rout.js,a\e\aec759a60a71dcdc6594365c1621c2d1eec53254
-K
-src/app/order/order_rout.js,2\a\2a7eaf8a3d2099b64b370ef9d4fc58362025d7c2
-L
-src/app/order/order_model.js,f\2\f269b37832e5bc2449523bd76f7560fea298d146
-P
- src/app/order/order_validator.js,f\3\f3e607b8e5cc68f165889fe21a372c26ae78a5c6
 T
 $src/app/product/product_validator.js,9\c\9c572766ed19f838c6d07ec86520fca252b79a0f
 P
  src/app/address/address_model.js,b\b\bb2a3829abdb76a8d81c9838c503909c9d979a3e
+S
+#src/app/review/review_validation.js,7\e\7e3e565bc3732031e061322774d7e14dd033c113
+M
+src/app/review/review_rout.js,9\d\9d649c7fadfd06e06e61d500258ceee066e0e4ab
+P
+ src/app/product/product_model.js,4\5\4560435be549fcb930589ee8a1b1da3cf57868db
+N
+src/app/review/review_model.js,0\9\090fb15c70039d3aa21fb581a33239724b855bcf
+O
+src/app/product/product_rout.js,1\8\182cad72cc691957014e2d7eee7abb771207d23a
+V
+&src/app/favorite/favorite_validator.js,f\b\fb6ed5bea829b1a3e3b6a1879490dfd81bd591fa
+R
+"src/app/favorite/favorite_model.js,1\e\1e1f709af49e88629e0829fcdf04df17fb782f6e
+Q
+!src/app/favorite/favorite_rout.js,3\d\3da9827edd1ab59444cc965f13c5a8464c1c8eac
+S
+#src/app/review/review_controller.js,0\0\00a0a8ecb307c77609f0e05e7c6d30becc82f4c4
+U
+%src/app/product/product_controller.js,1\7\173ad74dd5229991ebdf634617f3915081c77002
+R
+"src/app/category/category_model.js,e\a\ea7ef5cb548b2960ae977b5a80df6fbb29b7ccad
+W
+'src/app/category/category_controller.js,d\0\d0cfc2fdb4247d901ef513a51db40fc82908eed8
+E
+src/app/rout_index.js,d\3\d345b160e63bfd290406eb6483cf555e99210ae5
+V
+&src/app/category/category_validator.js,5\6\56994255e3abcce6db75ccbd220a445508f6d473
+Q
+!src/app/category/category_rout.js,f\4\f4780eb96202976c8abfebaa8a1dd3a991abb9fe

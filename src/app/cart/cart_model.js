@@ -1,12 +1,8 @@
-module.exports = (db, type) => db.define('Order', {
-
+module.exports = (db, type) => db.define('Cart', {
     id: {
         type: type.INTEGER, primaryKey: true, autoIncrement: true,
     },
     user_id: {
-        type: type.INTEGER, allowNull: false,
-    },
-    address_id: {
         type: type.INTEGER, allowNull: false,
     },
     product_id: {
@@ -21,9 +17,6 @@ module.exports = (db, type) => db.define('Order', {
     updatedAt: {
         type: type.DATE, allowNull: false,
     },
-    status_order: {
-        type: type.ENUM, values: ['pending', 'delivery', 'delivered'], defaultValue: 'pending',
-    },
 }, {
-    freezeTableName: true, timestamps: true, tableName: 'order',
+    freezeTableName: true, timestamps: true, tableName: 'cart',
 });
