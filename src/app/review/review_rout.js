@@ -12,8 +12,8 @@ const router = express.Router();
 
 // router.route("/get-reviews-for-product").get(getAllReviewsForProduct)
 router.route("/add-review").post(Auth.protectRout, validator.addReview, addReview)
-router.route("/edit-review").put(Auth.protectRout, validator.editReview, editReview)
-router.route("/delete-review").delete(Auth.protectRout, validator.deleteReview, deleteReview)
+// router.route("/edit-review").put(Auth.protectRout, validator.editReview, editReview)
+// router.route("/delete-review").delete(Auth.protectRout, validator.deleteReview, deleteReview)
 
 
 module.exports = router;
