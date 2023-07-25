@@ -3,8 +3,6 @@ const {Category} = require("../models_index")
 const successResponse = require("../../utils/response_handel/success_handeler")
 const {ApiError} = require("../../utils/response_handel/error_handeler");
 
-const env = require("dotenv");
-env.config({path: "./config.env"})
 
 // create category
 exports.createCategory = async (req, res, next) => {

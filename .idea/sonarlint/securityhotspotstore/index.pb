@@ -30,14 +30,6 @@ M
 src/config/firebase_config.js,f\f\ff907db98650a32d79d43226af6ee04def725779
 M
 src/middlewere/upload_file.js,9\7\970b900d1f2746280d086dc3679f135e53bcad4f
-V
-&src/app/category/category_validator.js,5\6\56994255e3abcce6db75ccbd220a445508f6d473
-R
-"src/app/category/category_model.js,e\a\ea7ef5cb548b2960ae977b5a80df6fbb29b7ccad
-Q
-!src/app/category/category_rout.js,f\4\f4780eb96202976c8abfebaa8a1dd3a991abb9fe
-W
-'src/app/category/category_controller.js,d\0\d0cfc2fdb4247d901ef513a51db40fc82908eed8
 T
 $src/app/address/address_validator.js,2\8\28b62145719c7cbcf72c4c27d6f9e79a958ea2fa
 U
