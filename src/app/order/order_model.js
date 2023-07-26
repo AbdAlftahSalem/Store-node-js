@@ -5,8 +5,8 @@ module.exports = (db, type) => db.define('Order', {
         allowNull: false,
     },
     coupon_id: {
-        type: type.STRING,
-        defaultValue: null,
+        type: type.INTEGER,
+        allowNull: false,
     },
     discount: {
         type: type.FLOAT,

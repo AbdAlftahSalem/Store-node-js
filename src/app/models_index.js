@@ -88,6 +88,14 @@ OrderItem.belongsTo(Order, {foreignKey: 'order_id'});
 Product.hasMany(OrderItem, {foreignKey: 'product_id'});
 OrderItem.belongsTo(Product, {foreignKey: 'product_id'});
 
+// order item belongs to a coupon
+Coupon.hasMany(OrderItem, {foreignKey: 'coupon_id'});
+OrderItem.belongsTo(Coupon, {foreignKey: 'coupon_id'});
+
+// order has one coupon or not
+Coupon.hasMany(Order, {foreignKey: 'coupon_id'});
+Order.belongsTo(Coupon, {foreignKey: 'coupon_id'});
+
 Category.belongsTo(Category, {
     as: 'parentCategory',
     foreignKey: 'parent_category',
