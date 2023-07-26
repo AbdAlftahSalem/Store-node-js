@@ -68,3 +68,13 @@ V
 &src/app/category/category_validator.js,5\6\56994255e3abcce6db75ccbd220a445508f6d473
 Q
 !src/app/category/category_rout.js,f\4\f4780eb96202976c8abfebaa8a1dd3a991abb9fe
+S
+#src/app/coupon/coupon_controller.js,8\8\88b5e3ef516d3e4210f1f35cab46951ee4d920d2
+W
+'src/app/favorite/favorite_controller.js,b\e\be4e3808f54c88dc23c051a9b77e19337af1fffb
+M
+src/app/coupon/coupon_rout.js,8\e\8eddd799908788871c56e83a3c7b09c4a1bedff8
+R
+"src/app/coupon/coupon_validator.js,c\9\c972d1ac7f1c35eee0d0379f2dac9d283a4efa3c
+N
+src/app/coupon/coupon_model.js,4\a\4a241beb63f1a58f25d889e92ebc1ca72414ca62

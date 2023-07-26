@@ -4,10 +4,6 @@ module.exports = (db, type) => db.define('Order', {
         type: type.INTEGER,
         allowNull: false,
     },
-    // product_ids: {
-    //     type: type.ARRAY(type.INTEGER), // Assuming your product IDs are integers.
-    //     allowNull: false,
-    // },
     coupon_id: {
         type: type.STRING,
         defaultValue: null,
@@ -35,7 +31,6 @@ module.exports = (db, type) => db.define('Order', {
     address_id: {
         type: type.INTEGER,
     },
-
 
 }, {
 

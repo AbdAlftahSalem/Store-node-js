@@ -1,7 +1,8 @@
-const {Product, Order, Address} = require("../models_index")
+const {Product, Order, Address, OrderItem} = require("../models_index")
 
 const successResponse = require("../../utils/response_handel/success_handeler")
 const {ApiError} = require("../../utils/response_handel/error_handeler");
+const {createOrderItem} = require("./order_item/order_item_controller");
 
 // create order
 exports.createOrder = async (req, res, next) => {
@@ -9,74 +10,60 @@ exports.createOrder = async (req, res, next) => {
     // add user_id to body
     req.body["user_id"] = req.body.user["id"]
 
-    // check if address exist
-    // const address = await Address.findOne({
-    //     where: {id: req.body["address_id"]},
-    // })
-    //
-    // if (!address) {
-    //     return next(new ApiError("Address not found", 404))
-    // }
-
-    // check if user is owner of address
-    // if (req.body.user["id"] !== address["user_id"]) {
-    //     return next(new ApiError("You are not authorized to create order with this address", 401))
-    // }
-
-    // check if product exist
-    // const product = await Product.findOne({
-    //     where: {id: req.body["product_id"]},
-    // })
-    //
-    // if (!product) {
-    //     return next(new ApiError("Product not found", 404))
-    // }
-    //
-    // // check if product quantity is available
-    // if (product["quantity"] < req.body["quantity"]) {
-    //     return next(new ApiError("can`t create order , the maximum quantity is " + product['quantity'], 400))
-    // }
-
-    // check if product status is available
-    // if (product["status"] !== "available") {
-    //     return next(new ApiError("can`t create order , the product is not available", 400))
-    // }
-
-    // check if address is found in database and is owned by user
-    // const addressFound = await Address.findOne({
-    //     where: {id: req.body["address_id"]},
-    // })
-    //
-    // if (!addressFound) {
-    //     return next(new ApiError("Address not found", 404))
-    // }
-
-
     const statusCheck = await validateInputOrder(req.body["product"], req.body.user["id"], req.body["address_id"], next)
     console.log(statusCheck)
     if (!statusCheck) {
         return next(new ApiError("can`t create order", 400))
     }
-    req.body['product_ids'] = req.body["product"].map(({product_id}) => ({product_id}))
+    // req.body['product_ids'] = req.body["product"].map(({product_id}) => ({product_id}))
 
     // create order for array of products
     const order = await Order.create(req.body)
 
-    // update product quantity
-    for (const element of req.body["product"]) {
-        const product = await Product.findOne({
-            where: {id: element},
-        })
-        await Product.update({
-            quantity: product["quantity"] - element["quantity"],
-        }, {
-            where: {id: element},
-        })
-    }
+    // add order_id to body
+    req.body["order_id"] = order["id"]
 
-    return successResponse(res, order, 201, "Order created successfully")
+    await createOrderItem(req, res, next)
+
+    // return successResponse(res, order, 201, "Order created successfully")
 
 }
+
+// get all orders for user
+exports.getAllOrdersForUser = async (req, res, next) => {
+
+    // get all orders for user and order items
+    const orders = await Order.findAll({
+        where: {user_id: req.body.user["id"]},
+        include: [
+            {
+                model: OrderItem,
+                include: [
+                    {
+                        model: Product,
+                    }
+                ],
+                attributes: {
+                    exclude: ['order_id', 'product_id']
+                }
+
+            },
+            {
+                model: Address,
+                attributes: {
+                    exclude: ['user_id']
+                }
+            },
+        ],
+        attributes: {
+            exclude: ['user_id', 'address_id']
+        }
+    })
+
+    return successResponse(res, orders, 200, "Orders retrieved successfully")
+
+}
+
 
 // validate order input [ create order ]
 validateInputOrder = async (products, user_id, address_id, next) => {
