@@ -2,6 +2,7 @@ const {Product, Category, User, Review} = require("../models_index")
 
 const successResponse = require("../../utils/response_handel/success_handeler")
 const {ApiError} = require("../../utils/response_handel/error_handeler");
+const {Op} = require("sequelize");
 
 
 // create product
@@ -12,6 +13,18 @@ exports.createProduct = async (req, res, next) => {
 
 // get all products
 exports.getAllProducts = async (req, res, next) => {
+
+    const {minPrice, maxPrice, orderBy} = req.query;
+
+    // Build the filter object based on the query parameters
+    const filters = {};
+    if (minPrice !== undefined && !isNaN(minPrice)) {
+        filters.price = {[Op.gte]: parseFloat(minPrice)};
+    }
+    if (maxPrice !== undefined && !isNaN(maxPrice)) {
+        filters.price = {...filters.price, [Op.lte]: parseFloat(maxPrice)};
+    }
+
     const products = await Product.findAll({
         include: [
             {
@@ -22,15 +35,23 @@ exports.getAllProducts = async (req, res, next) => {
                 model: Review, // Include the Review model to get reviews
             }
         ],
+        where: filters,
     })
+
     // Calculate the average rating for each product and remove the review list
-    products.forEach(product => {
+    products.forEach((product) => {
         const reviews = product["Reviews"];
-        product.dataValues.rating = reviews.reduce((total, review) => {
-            return total + review.rating;
-        }, 0) / reviews.length;
+        product.dataValues.rating =
+            reviews.reduce((total, review) => total + review.rating, 0) / reviews.length
         delete product.dataValues["Reviews"];
-    })
+    });
+
+    // Apply sorting based on the orderBy parameter
+    if (orderBy === "topRating") {
+        products.sort((a, b) => b.dataValues.rating - a.dataValues.rating);
+    } else if (orderBy === "lowRating") {
+        products.sort((a, b) => a.dataValues.rating - b.dataValues.rating);
+    }
 
 
     return successResponse(res, products, 200, "Products found successfully")
