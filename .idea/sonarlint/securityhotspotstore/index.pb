@@ -5,8 +5,6 @@ N
 src/middlewere/error_handle.js,4\5\453773d30b60086b38fe53a36f1577e3504b9988
 W
 'node_modules/sequelize/types/model.d.ts,3\3\3365d7899449b490dc8ada4392767d5b1d015126
-=
-src/server.js,1\3\13e00d296f20c95185b2ca268bf5dff6e7c0d96b
 N
 src/app/auth/user_validator.js,b\8\b8e9159e44cb25e5dfcd39a6a28f755e9fe47f48
 4
