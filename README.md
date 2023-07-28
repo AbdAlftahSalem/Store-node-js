@@ -9,7 +9,7 @@
 - [Firebase Setup](#firebase-setup)
 - [Usage](#usage)
 - [API collection](#api-collection)
-
+- [Contributing](#contributing)
 
 ## Introduction
 
