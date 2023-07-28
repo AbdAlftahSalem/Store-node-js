@@ -13,7 +13,7 @@
 
 ## Introduction
 
-Provide a brief introduction to the project. Mention its purpose, features, and any other important details.
+Provide a brief introduction to the project. Mention its purpose, features, and any other essential details.
 
 ## Technologies
 
@@ -44,7 +44,7 @@ Before running the application, you need to set up the MySQL database and config
 
 ## Firebase Setup
 
-Before running the application, you need to set up the Firebase Admin SDK and configure the connection.
+Before running the application, you must set up the Firebase Admin SDK and configure the connection.
 
 - In `.env` add the following environment variables:
     - TYPE=
@@ -70,8 +70,7 @@ npm start
 
 ## API collection
 
-The API collection is available at the following
-link: [https://github.com/AbdAlftahSalem/Store-node-js/blob/main/Store%20NodeJS.postman_collection.json])
+The API collection is available at the following link : [here](https://github.com/AbdAlftahSalem/Store-node-js/blob/main/Store%20NodeJS.postman_collection.json)
 
 ## Contributing
 
