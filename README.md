@@ -9,8 +9,7 @@
 - [Firebase Setup](#firebase-setup)
 - [Usage](#usage)
 - [API collection](#api-collection)
-- [Contributing](#contributing)
-- [License](#license)
+
 
 ## Introduction
 
@@ -71,4 +70,9 @@ npm start
 
 ## API collection
 
-The API collection is available at the following link: [])
+The API collection is available at the following
+link: [https://github.com/AbdAlftahSalem/Store-node-js/blob/main/Store%20NodeJS.postman_collection.json])
+
+## Contributing
+
+Contributions are welcome. Feel free to submit a Pull Request.
